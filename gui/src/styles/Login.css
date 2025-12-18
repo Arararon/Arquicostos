@@ -1,0 +1,27 @@
+.loginContainer{
+    width: 30%;
+    border: 1px solid red;
+    margin: 15% auto;
+    padding: 1em;
+}
+
+.obraContainer {
+    width: 30%;
+    margin: 20px auto;
+    padding: 1em;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    width: 100%;  
+    gap:16px;
+    margin: 10px auto;
+}
+
+.form-input{
+    padding:0.5em;
+    border-radius: 5px;
+    border: 1px solid #666;
+}

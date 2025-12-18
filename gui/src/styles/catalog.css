@@ -1,0 +1,27 @@
+input{
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
+input:focus{
+    outline: none;
+    border-bottom: 1px solid #1976d2;
+    background-color: #e3f2fd;
+}
+
+textarea {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-bottom: 1px solid #1976d2;
+    background-color: #e3f2fd;
+}
+
+.costo-wrap{
+    display: flex;
+}

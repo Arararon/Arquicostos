@@ -1,0 +1,68 @@
+:root {
+    --Dark-Primary: #005267;
+    --Dark-Secondary: #5e4160;
+    --Mid:#647b84;
+    --Light-Primary:#97afb9;
+    --Light-Secondary:#917292;
+    --template-spacing: 8px;
+    --template-palette-divider: hsla(220, 20%, 25%, 0.6);
+}
+
+body{
+    background-color: hsl(220, 35%, 3%);;
+    background-image: radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%));
+    height: 100vh;
+    width: 100%;
+    background-size:auto;
+    background-repeat: no-repeat;
+    color: hsl(0, 0%, 100%);
+
+}
+.log-canvas{
+    gap: calc(12 * var(--template-spacing));
+    flex-direction: column-reverse;
+    justify-content: center;
+    padding: calc(2 * var(--template-spacing));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-Container{
+    color:hsl(0, 0%, 100%);
+    background: hsla(220, 35%, 3%, 0.4);
+    box-shadow: hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    padding: calc(4 * var(--template-spacing));
+    gap: calc(2 * var(--template-spacing));
+    border: 1px solid var(--template-palette-divider);
+    justify-content: center;
+    margin: auto;
+}
+
+.log-flexbox {
+    display: flex;
+    gap: 16px;
+}
+
+.box {
+    flex: 1;
+    padding: 20px;
+}
+.form-input{
+    background-color: var(--Light-Primary) ;
+    padding: 10px;
+}
+
+.divider {
+    width: 1px;
+    background-color: #ccc;
+}
+
+/* Cuando la pantalla es menor a 768px, las cajas se apilan */
+@media (max-width: 1100px) {
+    .log-flexbox {
+        flex-direction: column;
+    }
+}
