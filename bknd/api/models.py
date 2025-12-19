@@ -8,8 +8,34 @@ class Obra (models.Model):
     description= models.TextField()
     created_at= models.DateTimeField(auto_now_add=True)
     author= models.ForeignKey(User, on_delete=models.CASCADE, related_name="obras")
+    calle=models.CharField(max_length=500)
+    numero=models.CharField(max_length=6)
+    codigoPostal=models.IntegerField()
+    estado=models.CharField(max_length=500)
+    municipio=models.CharField(max_length=500)
+
     def __str__(self):
         return self.name
+
+###Grupos de Trabajo###
+class GrupoTrabajo(models.Model):
+    nombre=models.CharField(max_length=100)
+    obra=models.ForeignKey(Obra, on_delete=models.CASCADE, related_name="grupoTrabajo")
+
+    def __str__(self):
+        return self.nombre
+
+
+###Grupo de Usuario###
+class GrupoUsuarios(models.Model):
+    usuario=models.ForeignKey(User, on_delete=models.CASCADE, related_name="grupoUsuarios")
+    rol=models.CharField(max_length=100)
+    grupo=models.ForeignKey(GrupoTrabajo, on_delete=models.CASCADE, related_name="grupoUsuarios")
+
+    def __str__(self):
+        return f"{self.usuario} - {self.rol}"
+
+
 
 ### partidas de la Obra ###
 class Partida(models.Model):

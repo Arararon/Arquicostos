@@ -73,6 +73,8 @@ function Row(props) {
     event.preventDefault();
     onDelete(row.id);
   }
+
+
   return (
     <Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -100,15 +102,15 @@ function Row(props) {
               <Typography variant="h6" gutterBottom component="div">
                 Materiales
               </Typography>
-              <InsumoTable rows={row.materiales} tipo="materiales" onChange={(e,id,type,field)=>handleChange(e,id,type,field)} />
+              <InsumoTable concepto={row} rows={row.materiales} tipo="materiales" onChange={(e,id,type,field)=>handleChange(e,id,type,field)} />
               <Typography variant="h6" gutterBottom component="div" sx={{ marginTop: 2 }}>
                 Mano de Obra
               </Typography>
-              <InsumoTable rows={row.mano_obra} tipo="mano_obra" onChange={(e,id,type,field)=>handleChange(e,id,type,field)} />
+              <InsumoTable concepto={row} rows={row.mano_obra} tipo="mano_obra" onChange={(e,id,type,field)=>handleChange(e,id,type,field)} />
               <Typography variant="h6" gutterBottom component="div" sx={{ marginTop: 2 }}>
                 Equipo y Herramienta
               </Typography>
-              <InsumoTable rows={row.equipo_herramienta} tipo="equipo_herramienta" onChange={(e,id,type,field)=>handleChange(e,id,type,field)}/>
+              <InsumoTable concepto={row} rows={row.equipo_herramienta} tipo="equipo_herramienta" onChange={(e,id,type,field)=>handleChange(e,id,type,field)}/>
             </Box>
           </Collapse>
         </TableCell>
@@ -118,11 +120,11 @@ function Row(props) {
 }
 
 function InsumoTable(props) {
-  const { rows,tipo, onChange } = props;
+  const { concepto,rows,tipo, onChange } = props;
   const columnas = {
-    materiales: ["Clave", "Descripción", "Cantidad", "Unidad", "Costo Unitario", "Total"],
-    mano_obra: ["Clave", "Descripción", "Cantidad", "Unidad", "Salario", "Total"],
-    equipo_herramienta: ["Clave", "Descripción", "Cantidad", "Unidad","Costo Unitario", "Total"]
+    materiales: ["Operación","Clave", "Descripción", "Cantidad", "Unidad", "Costo Unitario", "Total"],
+    mano_obra: ["Operación","Clave", "Descripción", "Cantidad", "Unidad", "Salario", "Total"],
+    equipo_herramienta: ["Operación","Clave", "Descripción", "Cantidad", "Unidad","Costo Unitario", "Total"]
   };
 
   const handleChange = (event,id,type,field) => {
@@ -155,6 +157,90 @@ function InsumoTable(props) {
     }
   };
 
+
+  const addInsumo=(concepto)=>{
+    switch (tipo) {
+      case "materiales":
+        api
+      .post(`/api/obras/${concepto.obra}/materiales/`, {
+        clave: "Nuevo Material",
+        descripcion: "descripción",
+        unidad:"pza",
+        costoUnitario:1.00,
+        clasificacion:"a",
+        colocado:true,
+        obra:concepto.obra
+      })
+      .then((res3) => {
+          if (res3.status === 201) {
+            api
+              .post(`/api/obras/${concepto.obra}/materiales_concepto/`, {
+                "concepto": concepto.id,
+                "material":res3.data.id,
+                "cantidad":1
+              })
+              .then((res3) => {
+                  if (res3.status === 201) {
+                      alert("Material Creado")
+                  }
+                  else alert("Fallo al vincular Partidas");
+              })
+
+
+              alert("Material Creado")
+              
+          }
+          else alert("Fallo al vincular Partidas");
+      })
+      break;     
+
+
+
+      case "mano_obra":
+        api
+      .post(`/api/obras/${obraId}/conceptos/${partidaId}/`, {
+        concepto: "Nuevo Concepto",
+        descripcion: "descripción",
+        cantidad: 1,
+        obra:obraId,
+        partida: partidaId,
+      })
+      .then((res3) => {
+          if (res3.status === 201) {
+              alert("Concepto Creado")
+              getConceptos();
+          }
+          else alert("Fallo al vincular Partidas");
+      })
+      break;  
+        
+
+
+      case "equipo_herramienta":
+        api
+      .post(`/api/obras/${obraId}/conceptos/${partidaId}/`, {
+        concepto: "Nuevo Concepto",
+        descripcion: "descripción",
+        cantidad: 1,
+        obra:obraId,
+        partida: partidaId,
+      })
+      .then((res3) => {
+          if (res3.status === 201) {
+              alert("Concepto Creado")
+              getConceptos();
+          }
+          else alert("Fallo al vincular Partidas");
+      })
+      break;  
+      
+
+      default:
+      break;  
+      
+    }
+  }
+
   return (
     <Fragment>
     <Table>
@@ -172,7 +258,7 @@ function InsumoTable(props) {
             </TableRow>
           ))}
           <TableRow>
-          <TableCell colSpan={3} ><Button variant="contained" a startIcon={<AddIcon />}>Agregar {getTituloInsumo(tipo)} </Button></TableCell>
+          <TableCell colSpan={4} ><Button variant="contained" onClick={()=>{addInsumo(concepto)}} startIcon={<AddIcon />}>Agregar {getTituloInsumo(tipo)} </Button></TableCell>
           <TableCell colSpan={2}><strong>SubTotal {getTituloInsumo(tipo)}:</strong></TableCell>
           <TableCell>{getsubtotal(tipo,rows)}</TableCell>
         </TableRow>
@@ -193,6 +279,7 @@ function MaterialRow(props) {
 
   return (
   <Fragment>
+      <TableCell/>
       <TableCell><input value={row.material_detalle.clave} onChange={(e)=>handleChange(e,row.id,"clave")}/></TableCell>
       <TableCell><textarea value={row.material_detalle.descripcion} onChange={(e)=>handleChange(e,row.id,"descripcion")}/></TableCell>
       <TableCell ><input value={row.cantidad} type="number" min="0" onChange={(e)=>handleChange(e,row.id,"cantidad")}/></TableCell>
@@ -210,6 +297,7 @@ function ManoObraRow(props) {
   };
   return (
     <Fragment>
+      <TableCell/>
       <TableCell><input value={row.mano_obra_detalle.clave} onChange={(e)=>handleChange(e,row.id,"clave")}/></TableCell>
       <TableCell><textarea value={row.mano_obra_detalle.descripcion} onChange={(e) => handleChange(e, row.id, "descripcion")} /></TableCell>
       <TableCell ><input value={row.cantidad} type="number" min="0" onChange={(e)=>handleChange(e,row.id,"cantidad")}/></TableCell>
@@ -227,6 +315,7 @@ function EquipoHerramientaRow(props) {
   }
   return (
     <Fragment>
+      <TableCell/>
       <TableCell><input value={row.equipo_herramienta_detalle.clave} onChange={(e)=>handleChange(e,row.id,"clave")}/></TableCell>
       <TableCell><textarea value={row.equipo_herramienta_detalle.descripcion} onChange={(e) => handleChange(e, row.id, "descripcion")} /></TableCell>
       <TableCell ><input value={row.cantidad} type="number" min="0" onChange={(e)=>handleChange(e,row.id,"cantidad")}/></TableCell>
@@ -260,10 +349,11 @@ useEffect(() => {
 
     if (partidaId !== "") {
       api
-            .get(`/api/obras/${obraId}/conceptos/${partidaId}`)
+            .get(`/api/obras/${obraId}/conceptos/${partidaId}/`)
             .then((res) => res.data)
             .then((data) => {
               setConceptos(data);
+              console.log(data)
               const materialList = [];
               const manoObraList = [];
               const equipoHerramientaList = [];
@@ -284,7 +374,7 @@ useEffect(() => {
 
   const createConcepto = () => {
     api
-      .post(`/api/obras/${obraId}/conceptos/${partidaId}`, {
+      .post(`/api/obras/${obraId}/conceptos/${partidaId}/`, {
         concepto: "Nuevo Concepto",
         descripcion: "descripción",
         cantidad: 1,
@@ -300,9 +390,29 @@ useEffect(() => {
       })
   }
 
+
+    const duplicateConcepto = (concepto) => {
+    api
+      .post(`/api/obras/${obraId}/conceptos/${partidaId}/`, {
+        concepto: concepto.concepto,
+        descripcion: concepto.descripcion,
+        cantidad: concepto.cantidad,
+        obra:obraId,
+        partida: partidaId,
+      })
+      .then((res3) => {
+          if (res3.status === 201) {
+              alert("Concepto Duplicado")
+              getConceptos();
+          }
+          else alert("Fallo al vincular Partidas");
+      })
+  }
+
   const deleteConcepto = (id) => {
     api
-      .delete(`/api/obras/${obraId}/conceptos/${id}/delete/`)
+    
+      .delete(`/api/obras/${id}/conceptos/delete/`)
       .then((res) => {
         if (res.status === 204) alert("concepto eliminado");
         else alert("Fallo en elimiar concepto")
@@ -445,12 +555,16 @@ useEffect(() => {
         </TableHead>
         <TableBody>
           {conceptos.map((row) => (
-            <Row key={row.id} row={row}
+            <Row key={row.id} row={row} 
               onChange={(e, id, type, field) => { updateInsumo(row, id, field, e.target.value, type) }}
+
               onCopy={(row) => {
-                const newConcepto = { ...row, id: Date.now() };
-                setConceptos([...conceptos, newConcepto]);
+                duplicateConcepto(row)
               }}
+
+
+              
+              
               onDelete={(id) => {
                 deleteConcepto(id)
               }}

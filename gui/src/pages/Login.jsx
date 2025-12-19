@@ -5,7 +5,7 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import {Button} from "@mui/material";
 import LoadingIndicator from "../components/LoadingIndicator";
 import "../styles/Login.css";
-import "../styles/App.css";
+import "../styles/app.css";
 
 function Login() {
 
@@ -29,7 +29,6 @@ function Login() {
             }else{
                 navigate("/login");
             }
-
         }
         catch(error){
             alert(error);

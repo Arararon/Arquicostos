@@ -7,6 +7,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import Obra from "./pages/Obra"
 import Matrices from "./pages/Matrices"
 import MainLayout from "./pages/Layout"
+import Grupos from "./pages/Grupos"
 
 
 function Logout() {
@@ -24,6 +25,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>}/>
+        <Route path="/Grupos/:obraId" element={<ProtectedRoute><Grupos /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
@@ -31,6 +33,7 @@ function App() {
         <Route path="/obra/:obraId/concepto/:conceptoId" element={<ProtectedRoute><Matrices /></ProtectedRoute>} />
         <Route path="/catalogo/:obraId" element={<ProtectedRoute><MainLayout /></ProtectedRoute>} />
         <Route path="*" element={<NotFound />}></Route>
+
         
       </Routes>
     </BrowserRouter>

@@ -6,9 +6,16 @@ urlpatterns = [
     path("obras/<int:pk>/", views.ObraDetail.as_view(), name="obra-detail"),
     path("obras/<int:pk>/delete/", views.ObraDelete.as_view(), name="obra-delete"),
 
-    path("obras/<int:pk>/conceptos/<int:part>", views.ConceptoListCreate.as_view(), name="concepto-list"),
+    path("obras/<int:pk>/gruposTrabajo/",views.GrupoTrabajoListCreate.as_view(), name="grupo-trabajo-list"),
+    path("obras/<int:pk>/gruposTrabajo/<int:group>",views.GrupoTrabajoDelete.as_view(), name="grupo-trabajo-delete"),
+    path("obras/<int:pk>/gruposUsuarios/",views.GrupoUsuariosListCreate.as_view(), name="grupo-usuarios-list"),
+
+    path("obras/adicionales/",views.ObrasDelUsuarioView.as_view(), name="obrasColaborativas"),
+
+
+    path("obras/<int:pk>/conceptos/<int:part>/", views.ConceptoListCreate.as_view(), name="concepto-list"),
     path("obras/<int:pk>/conceptos/<int:concepto_pk>/update/", views.ConceptoUpdate.as_view(), name="concepto-update"),
-    path("obras/<int:pk>/conceptos/<int:concepto_pk>/delete/", views.ConceptoDelete.as_view(), name="concepto-delete"),
+    path("obras/<int:pk>/conceptos/delete/", views.ConceptoDelete.as_view(), name="concepto-delete"),
     path("obras/<int:pk>/conceptos/<int:concepto_pk>/", views.ConceptoDetailView.as_view(), name="concepto-detail"),
     
     path("obras/<int:pk>/partidas/", views.PartidaListCreate.as_view(), name="partida-list"),

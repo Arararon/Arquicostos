@@ -19,12 +19,32 @@ class ObraSerializer(serializers.ModelSerializer):
     conceptos = serializers.SerializerMethodField()
     class Meta:
         model = Obra
-        fields = ["id", "name", "description", "created_at", "author", "conceptos"]
+        fields = ["id", "name", "description", "created_at", "author", "calle","numero","codigoPostal","estado","municipio","conceptos"]
         extra_kwargs = {"author": {"read_only": True}}
     
     def get_conceptos(self, obj):
         conceptos = Concepto.objects.filter(obra=obj)
         return ConceptoSerializer(conceptos, many=True).data
+    
+
+###---------------------------------###
+
+class GrupoTrabajoSerializer(serializers.ModelSerializer):
+    usuarios=serializers.SerializerMethodField()
+    class Meta:
+        model = GrupoTrabajo
+        fields=["id","nombre","obra","usuarios"]
+    
+    def get_usuarios(self,obj):
+        grupoUsuarios=GrupoUsuarios.objects.filter(grupo=obj)
+        return GrupoUsuariosSerializer(grupoUsuarios, many=True).data
+    
+
+
+class GrupoUsuariosSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GrupoUsuarios
+        fields=["id","usuario","rol","grupo"]
     
 
 ###----------------------------------###

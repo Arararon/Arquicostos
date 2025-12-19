@@ -71,7 +71,6 @@ return (
         xs={4}
         sx={{
             borderRight: "1px solid #ccc",
-            backgroundColor: "#fafafa",
             p: 2,
         }}
 >
@@ -82,7 +81,7 @@ return (
                 {treeData.map((partida) => (
                     <TreeItem key={partida.id} itemId={partida.id.toString()} label={partida.nombre} onClick={()=>console.log(currentPartida)}>
                         {partida.hijos && partida.hijos.map((hijo) => (
-                            <TreeItem key={hijo.id} itemId={hijo.id.toString()} label={`${hijo.id} - ${hijo.nombre}`} onClick={()=>setCurrentPartida(hijo.id)}/>
+                            <TreeItem key={hijo.id} itemId={hijo.id.toString()} label={hijo.nombre} onClick={()=>setCurrentPartida(hijo.id)}/>
                         ))}
                         <TreeItem key={`addSub${partida.id}`} itemId={`addSub${partida.id}`} label={"+ Añadir Sub-partida"} onDoubleClick={(e) => handleDoubleClick(e, partida.id)}/>
                     </TreeItem>

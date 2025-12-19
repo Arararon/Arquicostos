@@ -52,6 +52,63 @@ class ObraDelete(generics.DestroyAPIView):
         return Obra.objects.filter(author=user)
     
 
+#####----------Obra Group------------#####
+
+class ObrasDelUsuarioView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        obras = Obra.objects.filter(
+            grupoTrabajo__grupoUsuarios__usuario=request.user
+        ).distinct()
+
+        serializer = ObraSerializer(obras, many=True)
+        return Response(serializer.data)
+
+####-----------Grupo de Usuarios-------------#####
+
+class GrupoTrabajoListCreate(generics.ListCreateAPIView):
+    queryset=GrupoTrabajo.objects.all()
+    serializer_class=GrupoTrabajoSerializer
+    permission_classes=[IsAuthenticated]
+    def get_queryset(self):
+        user = self.request.user
+        obra = Obra.objects.get(id=self.kwargs["pk"])
+        return GrupoTrabajo.objects.filter(obra__author=user,obra=obra)
+    
+    def perform_create(self, serializer):
+        if serializer.is_valid():
+            obra = Obra.objects.get(id=self.request.data["obra"])
+            serializer.save(obra=obra)
+        else:
+            print(serializer.errors)         
+
+class GrupoTrabajoDelete(generics.DestroyAPIView):
+    serializer_class = GrupoTrabajoSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return GrupoTrabajo.objects.filter(obra__author=user)
+    
+
+class GrupoUsuariosListCreate(generics.ListCreateAPIView):
+    queryset=GrupoUsuarios.objects.all()
+    serializer_class=GrupoUsuariosSerializer
+    permission_classes=[IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return GrupoUsuarios.objects.filter(grupo__obra__author=user)
+    
+    def perform_create(self, serializer):
+        if serializer.is_valid():
+            grupo = GrupoTrabajo.objects.get(id=self.request.data["grupo"])
+            serializer.save(grupo=grupo)
+        else:
+            print(serializer.errors)
+
+
 ####----------Concepto-------------###
 
 class ConceptoListCreate(generics.ListCreateAPIView):
