@@ -1,0 +1,87 @@
+:root{
+   --arq-color-50: #fcf7ea;
+   --arq-color-100: #f8edc9;
+   --arq-color-200: #f2d996;
+   --arq-color-300: #eabd5a;
+   --arq-color-400: #e2a32d;
+   --arq-color-500: #e2a32d;
+   --arq-color-600: #d28c20;
+   --arq-color-700: #914d17;
+   --arq-color-800: #793e1a;
+   --arq-color-900: #67351c;
+   --arq-color-950: #3c1a0c;
+}
+
+
+*{
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--arq-color-950);
+    font-size: 1.01em;
+}
+
+.sansation-light {
+  font-family: "Sansation", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.sansation-regular {
+  font-family: "Sansation", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sansation-bold {
+  font-family: "Sansation", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.sansation-light-italic {
+  font-family: "Sansation", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.sansation-regular-italic {
+  font-family: "Sansation", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.sansation-bold-italic {
+  font-family: "Sansation", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+h1{
+    font-family: "Sansation", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 2em;
+}
+
+h2{
+    font-family: "Sansation", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 1.5em;
+}
+
+h3{
+    font-family: "Sansation", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.17em;
+}
+
+h4{
+    font-family: "Sansation", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 1.12em;
+}

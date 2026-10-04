@@ -1,0 +1,24 @@
+.obraCard{
+    border-radius: 12px;
+    box-shadow: 1px 5px 9px 3px rgba(0,0,0,0.5)
+}
+.obraImagen{
+    background-image: url("../assets/obra.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    height:150px;
+    border-radius: 12px 12px 0 0;
+}
+.obraInfo{
+    padding: 12px;
+}
+.ObraButtonBar{
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin: auto 8px 12px 8px;
+}
+.ObraButtonBar button{
+    padding: 7px;
+}
