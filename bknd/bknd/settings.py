@@ -32,7 +32,7 @@ DEBUG = True
 
 #ALLOWED_HOSTS = ["www.arquicostos.com","arquicostos.com"]
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["www.arquicostos.com","arquicostos.com"]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
