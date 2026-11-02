@@ -1,0 +1,32 @@
+.nueva-obra-card {
+    height: 307px;
+    width: 300px;
+    border-radius: 12px;
+    border: 2px dashed gray;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nueva-obra-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.nueva-obra-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 600px;
+    padding: 20px;
+}
+
+.nueva-obra-form input {
+    min-height: 35px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}

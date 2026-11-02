@@ -1,2 +1,2 @@
-.env
+gui/.env
 db.qlite3

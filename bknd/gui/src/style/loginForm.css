@@ -18,4 +18,13 @@
     border:none;
     width: 100%;
 }
+.loginButtonsContainer{
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+}
+
+.LoginSwitch{
+    cursor: pointer;
+}
 

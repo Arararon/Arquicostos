@@ -1,0 +1,10 @@
+.obras-container{
+    margin: 10px;
+}
+.flexgrid-layout {
+
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+
+}

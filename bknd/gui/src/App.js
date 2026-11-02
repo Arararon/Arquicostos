@@ -1,19 +1,17 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-
-import Register from "./pages/Register"
-import Home from "./layouts/Home"
+import Home from "./pages/Home"
 import Catalogo from "./layouts/Catalogo"
 import Login from "./layouts/Login"
 
 
-import NotFound from "./pages/NotFound"
-import ProtectedRoute from "./components/ProtectedRoute"
-import Obra from "./pages/Obra"
-import Matrices from "./pages/Matrices"
+import NotFound from "./layouts/NotFound"
+import ProtectedRoute from "./components_legacy/ProtectedRoute"
+import Obra from "./layouts/Obra"
+import Matrices from "./page_legacy/Matrices"
 
-import Grupos from "./pages/Grupos"
-import "./style/global.css"
-import Listados from "./layouts/Listados"
+import Grupos from "./page_legacy/Grupos"
+import "./styles/global.css"
+import Listados from "./tools/Listados"
 
 
 function Logout() {
@@ -41,7 +39,6 @@ function App() {
         <Route path="/listados/:obraId" element={<ProtectedRoute><Listados /></ProtectedRoute>}></Route>
         <Route path="*" element={<NotFound />}></Route>
 
-        
       </Routes>
     </BrowserRouter>
   )
