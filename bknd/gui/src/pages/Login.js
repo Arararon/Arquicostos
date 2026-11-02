@@ -1,4 +1,4 @@
-import LoginForm from "../components_legacy/LoginForm"
+import LoginForm from "../components/LoginForm"
 
 function Login({method,route}){
     return(

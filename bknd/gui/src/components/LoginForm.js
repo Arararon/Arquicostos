@@ -3,7 +3,7 @@ import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import LoadingIndicator from "./LoadingIndicator";
-import "../style/loginForm.css"
+import "../styles/loginForm.css"
 
 function LoginForm({route,method}){
     const [username, setUsername] = useState("");
