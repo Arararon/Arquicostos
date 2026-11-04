@@ -121,7 +121,9 @@ function ListadoObras({handleNavigateObra}) {
                     title={"Crear Nueva Obra"}
                     button={<NuevaObraButton />}
                 >
-                    <NuevaObraForm/>
+                    <NuevaObraForm
+                        method={"create"}
+                        handleCrearObra={(e)=>{createObra(e)}} />
                 </Drawer>
             :
             <div className="flexgrid-layout">
